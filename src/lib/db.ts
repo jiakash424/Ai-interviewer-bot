@@ -9,7 +9,12 @@ export interface User {
   createdAt: string;
 }
 
-const DB_PATH = path.join(process.cwd(), 'data', 'users.json');
+// Vercel has a read-only filesystem; /tmp is the only writable directory
+const DATA_DIR = process.env.VERCEL
+  ? path.join('/tmp', 'data')
+  : path.join(process.cwd(), 'data');
+
+const DB_PATH = path.join(DATA_DIR, 'users.json');
 
 function ensureDbExists() {
   const dir = path.dirname(DB_PATH);
