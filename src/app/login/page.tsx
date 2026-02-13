@@ -59,8 +59,9 @@ export default function LoginPage() {
 
       setSuccess(isSignUp ? 'Account created! Redirecting...' : 'Login successful! Redirecting...');
 
+      // Hard redirect so the browser picks up the fresh Set-Cookie header
       setTimeout(() => {
-        router.push('/interview');
+        window.location.href = '/interview';
       }, 1000);
     } catch {
       setError('Network error. Please try again.');
